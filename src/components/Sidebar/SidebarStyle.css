@@ -1,0 +1,80 @@
+.SearchBoxInput{
+    float:right;
+  width:25%;
+  height:35px; 
+}
+.SearchBoxInput:focus{
+ 
+    outline:none;
+    box-shadow: 0 14px 28px rgba(190, 189, 189, 0.25), 0 10px 10px rgba(219, 193, 193, 0.22);
+}
+.HeaderClass{
+    margin-top:10px;
+    height: max-content;
+  
+}
+.BellIcon{
+    /* padding:10px; */
+    margin-left: 10px;
+    border: 1px solid grey;
+    height:35px;
+    width:35px;
+    margin-top:5px;
+}
+.BellIcon:hover{
+       background-color: #4CAF50;
+    color:white;
+    box-shadow: 0 2px 2px -1px #ffff;
+}
+.logout_btn{
+    display:none;
+    height:35px;
+    width:35px;
+    margin-top:1px;
+    border:3px solid green;
+    background-color: green;
+    margin-left: 20px;
+    float:right;
+
+}
+.logout_btn:hover{
+       background-color: #4CAF50;
+    color:white;
+}
+.logout_btn:click{
+    color:red;
+}
+.AllColorsStyleDiv{
+    position:absolute;
+    top:50%;
+    float:right;
+    padding:10px;
+    margin-left: 80%;
+
+}
+.show{
+   
+     display:none;
+}
+.not_show{
+  display:block;
+    position:absolute;
+    top:43%;
+    float:right;
+    padding:10px;
+    margin-left: 49%;
+    border:"none";
+     background-color:"transparent";
+}
+.CircularColorDiv{
+   margin:2px;
+   height:50px;
+   width:50px;
+   border-radius: 50%;
+}
+.CircularColorDiv:hover{
+    border:3px;
+} 
+.SidebarNewDisplay{
+    display:flex;
+}
