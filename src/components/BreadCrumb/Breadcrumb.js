@@ -3,7 +3,7 @@ import { brown } from '../../colors';
 import './BreadCrumbStyle.css'
 
 const breadcrumb={
-    backgroundColor:"white",
+    backgroundColor:"transparent",
     borderRadius:'0.37'
 }
 const Breadcrumb=(props)=>{

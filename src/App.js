@@ -44,8 +44,8 @@ const App = () => {
         menuItems={menuItems}
         fonts={fonts}
         colorPalette={Palette.julyBlue} ></Header>
-    <s.App>
-       
+     <s.App>
+      
       <Sidebar
         backgroundImage={backgroundImage}
         sidebarHeader={sidebarHeader}
@@ -53,6 +53,7 @@ const App = () => {
         fonts={fonts}
         colorPalette={Palette.julyBlue}
       />
+    
     
       <MainView />
     </s.App>
