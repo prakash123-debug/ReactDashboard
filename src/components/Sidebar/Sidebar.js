@@ -17,6 +17,7 @@ const  colors_sets=[
   {name:AllColors.brown,color_type:"brown"},
   {name:AllColors.silver,color_type:"silver"}
 ];
+// console.log(colors_sets);
 
 const Sidebar = props => {                                                                                                                        
   // console.log(props);
@@ -35,20 +36,13 @@ const Sidebar = props => {
     
 
   } = props;
-  
-  // let colorPalette = {
-  //   bgColor1: props.colorPalette.bgColor1,
-  //   bgColor2: props.colorPalette.bgColor2,
-  //   fontColor: props.colorPalette.fontColor,
-  //   fontColorSelected: props.colorPalette.fontColorSelected,
-  //   dividerColor: props.colorPalette.dividerColor,
-  //   selectedBackgroundCollapsedMode: props.colorPalette.selectedBackgroundCollapsedMode
-  // }=props;
+  const colorPalette=props.colorPalette;
 
+  // console.log(colorPalette);
+ 
 
-// console.log(menuItems[0]);
-  // State
-  // const [colorPalette,setcolorPalette]=useState([])
+const [selectedColor,setSelectedColor]=useState([colors_sets[3].name])
+console.log(selectedColor);
   const [selected, setSelectedMenuItem] = useState(menuItems[0].name);
   // console.log(selected);
   const [isSidebarOpen, setSidebarState] = useState(true);
@@ -57,7 +51,6 @@ const Sidebar = props => {
   const[visible,setVisible]=useState("show");
   //for bringing all the colors in here
 
-  let colorPalette=props.colorPalette;
   // Effects
 
   // Set selected menu item based on URL pathname
@@ -182,10 +175,22 @@ const Sidebar = props => {
       setVisible('show');
     }
   }
+  
+  const ChangeColorFunction=(ColorName)=>{
+    // console.log(ColorName);
+    colors_sets.map((index,i)=>{
 
-  const ChangeColorFunction=(e)=>{
-    colorPalette=e.target.value;
+      if(index.color_type===ColorName)
+      {
+        setSelectedColor([index.name])
+        // console.log(index[i]);
+      } 
+     
+    })
   }
+
+
+  
 
 
   const menuItemsJSX = menuItems.map((item, index) => {
@@ -258,33 +263,20 @@ const Sidebar = props => {
         <s.Toggler />
       </s.TogglerContainer>
     </s.SidebarContainer>
-    {/* <s.HeaderContainer backgroundImage={backgroundImage} isSidebarOpen={isSidebarOpen} colorPalette={colorPalette}>
-      
-      <div className="HeaderClass">
-      <FaBell className="BellIcon"></FaBell>
-      <input type="search" className="SearchBoxInput"
-          placeholder='Search...'
-          /> 
-      <FaSearch className="logout_btn"></FaSearch>
-
-      </div>
-      
-    </s.HeaderContainer >
-  
-    <div>
+   
+         <div>
        <button className="AllColorsStyleDiv" onClick={ShowOrHideDiv} type="button"  title=" Click to Change Font"><FaPalette></FaPalette></button>
          <div className={visible}>
                 {
                   colors_sets.map((index,i)=>{
                     return(
-                          <button className="CircularColorDiv" title={index.color_type} onClick={ChangeColorFunction} value={index.color_type} style={{backgroundImage: `linear-gradient(${index.name.bgColor1}, ${index.name.bgColor2})` }}></button>
+                          <button className="CircularColorDiv" title={index.color_type} onClick={()=>ChangeColorFunction(index.color_type)} value={index.color_type} style={{backgroundImage: `linear-gradient(${index.name.bgColor1}, ${index.name.bgColor2})` }}></button>
                     )
                   })
                 }
          </div>
    </div>  
    <Footer backgroundImage={backgroundImage} isSidebarOpen={isSidebarOpen} colorPalette={colorPalette} ></Footer> 
-        */}
     </>
     
   )
