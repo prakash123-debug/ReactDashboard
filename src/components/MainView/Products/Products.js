@@ -1,10 +1,29 @@
 import React,{useState,useEffect} from 'react';
 import Breadcrumb   from '../../BreadCrumb/Breadcrumb';
-import { Container,Row,Col,Table,Button,Modal,Form,FormGroup,InputGroup,FormControl} from 'react-bootstrap';
+import { Container,Row,Col,Table,Button,Modal} from 'react-bootstrap';
 import { BsFillPlusCircleFill,BsPersonFill } from "react-icons/bs";
+import { Formik,Form } from 'formik';
+import TextField from './TextField';
+import * as Yup from 'yup'
 
 import './ProductsStyle.css'
 const Products =()=>{
+    const validate=Yup.object({
+        FirstName:Yup.string()
+        .max(10,'Must be 15 character or less')
+        .required('Required'),
+        LastName:Yup.string()
+        .max(10,'Must be 10 character').
+        required('Required'),
+        email:Yup.string()
+        .required('Require'),
+        password:Yup.string()
+        .min('5','must be greater than 15 character')
+        .max('20','only 20 character are available'),
+        confirmPassword:Yup.string()
+       .oneOf([Yup.ref('password'),null],'password must be same')
+       .required('confirm password is required')
+    })
     const [crumbs,setCrumbs]=useState(['Home','Products']);
     const selected=crumb=>{
         console.log(crumb);
@@ -72,8 +91,8 @@ const Products =()=>{
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <Form>
-  <Form.Row className="align-items-center">
+        {/* <Form> */}
+  {/* <Form.Row className="align-items-center">
     
     <Col xs="auto m-1" md="12">
       <Form.Label htmlFor="inlineFormInputGroup" srOnly>
@@ -106,6 +125,9 @@ const Products =()=>{
       </InputGroup>
   </Form.Group>
     </Col>
+    <Formik>
+
+    </Formik>
   
     
     
@@ -115,7 +137,45 @@ const Products =()=>{
       </Button>
     </Col>
   </Form.Row>
-</Form>
+</Form> */}
+
+    <Formik
+    initialValues={{
+      firstName:"",
+      LastName:"",
+      email:"",
+      password:"",
+      confirmPassword:"",
+    }}
+    onSubmit={(values, actions) => {
+      setTimeout(() => {
+        alert(JSON.stringify(values, null, 2));
+        actions.setSubmitting(false);
+      }, 1000);}}
+    validationSchema={validate}
+    
+    >
+      {
+        formik=>(
+        <div>
+          <form>
+        {/* {console.log(formik.values)} */}
+            <TextField label="First Name" name="FirstName" type="text"/>
+            <TextField label="Last Name" name="LastName" type="text"/>
+            <TextField label="email" name="email" type="email"/>
+            <TextField label="Password" name="password" type="password"/>
+            <TextField label="Confirm Password" name="confirmPassword" type="password"/>
+            <button className="btn btn-dark mt-3"  type="submit">Submit</button>
+            </form>
+        </div>
+        )
+          
+        }
+      
+    </Formik>
+
+
+
         </Modal.Body>
       </Modal>
            

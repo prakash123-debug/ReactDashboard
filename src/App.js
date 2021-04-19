@@ -53,8 +53,6 @@ const App = () => {
         fonts={fonts}
         colorPalette={Palette.julyBlue}
       />
-    
-    
       <MainView />
     </s.App>
     </>

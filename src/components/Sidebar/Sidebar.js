@@ -265,12 +265,12 @@ console.log(selectedColor);
     </s.SidebarContainer>
    
          <div>
-       <button className="AllColorsStyleDiv" onClick={ShowOrHideDiv} type="button"  title=" Click to Change Font"><FaPalette></FaPalette></button>
+       <button className="AllColorsStyleDiv" style={{backgroundImage: `linear-gradient(${colorPalette.bgColor1}, ${colorPalette.bgColor2})` }} onClick={ShowOrHideDiv} type="button"  title=" Click to Change Font"><FaPalette></FaPalette></button>
          <div className={visible}>
                 {
                   colors_sets.map((index,i)=>{
                     return(
-                          <button className="CircularColorDiv" title={index.color_type} onClick={()=>ChangeColorFunction(index.color_type)} value={index.color_type} style={{backgroundImage: `linear-gradient(${index.name.bgColor1}, ${index.name.bgColor2})` }}></button>
+                          <button  className="CircularColorDiv" title={index.color_type} onClick={()=>ChangeColorFunction(index.color_type)} value={index.color_type} style={{backgroundImage: `linear-gradient(${index.name.bgColor1}, ${index.name.bgColor2})` }}></button>
                     )
                   })
                 }
