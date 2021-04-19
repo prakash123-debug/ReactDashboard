@@ -1,7 +1,7 @@
 import React from 'react';
-import * as s from '../Sidebar/Sidebar.styles';
 import '../Sidebar/Sidebar.styles';
-import './FooterStyle.css'
+import './FooterStyle.css';
+import * as s from  './FooterStyle';
 
 const Footer =(props)=>{
     return(

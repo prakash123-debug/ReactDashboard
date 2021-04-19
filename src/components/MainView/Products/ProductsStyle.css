@@ -6,3 +6,11 @@
 .ProductButton{
     margin-top: 20px;
 }
+.error{
+   
+    color:red;
+    font-size: .6rem;
+}
+label{
+    font-size: .7rem;
+}

@@ -18,25 +18,7 @@ width:100%;
  position:fixed;
 `
 
-export const FooterContainer = styled.div`
- width: ${p => p.isSidebarOpen ? '80%' : '94%'};
- background-image: linear-gradient(
-  315deg,
-  ${p => p.colorPalette.bgColor1} 20%,
-  ${p => p.colorPalette.bgColor2} 0%),
-  url(${p => p.backgroundImage});
- color: ${p => p.colorPalette.fontColorSelected};
- position:fixed;
- top:92.7%; right:0;
- height:60px;
- transition: .2s ease-in all
- background-size: cover;
-`
 
-export const colors_datas = styled.div`
- height:60px;
-
-`
 
 export const SidebarContainer = styled.div`
   width: ${p => p.isSidebarOpen ? '20%' : '5%'};
