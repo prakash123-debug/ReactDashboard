@@ -17,10 +17,8 @@ const  colors_sets=[
   {name:AllColors.brown,color_type:"brown"},
   {name:AllColors.silver,color_type:"silver"}
 ];
-// console.log(colors_sets);
 
 const Sidebar = props => {                                                                                                                        
-  // console.log(props);
   const { 
     backgroundImage = '', 
     sidebarHeader = {
@@ -32,17 +30,12 @@ const Sidebar = props => {
       header: '',
       menu: ''
     },
-   
-    
-
   } = props;
   const colorPalette=props.colorPalette;
 
-  // console.log(colorPalette);
- 
 
 const [selectedColor,setSelectedColor]=useState([colors_sets[3].name])
-console.log(selectedColor);
+// console.log(selectedColor);
   const [selected, setSelectedMenuItem] = useState(menuItems[0].name);
   // console.log(selected);
   const [isSidebarOpen, setSidebarState] = useState(true);
@@ -165,33 +158,29 @@ console.log(selectedColor);
 
 
 
-  const ShowOrHideDiv=(e)=>{
-    if(visible==='show')
-    {
-      setVisible('not_show');
-    }
-    else if(visible==="not_show")
-    {
-      setVisible('show');
-    }
-  }
-  
-  const ChangeColorFunction=(ColorName)=>{
-    // console.log(ColorName);
-    colors_sets.map((index,i)=>{
+      const ShowOrHideDiv=(e)=>{
+        if(visible==='show')
+        {
+          setVisible('not_show');
+        }
+        else if(visible==="not_show")
+        {
+          setVisible('show');
+        }
+      }
+      
+      const ChangeColorFunction=(ColorName)=>{
+        // console.log(ColorName);
+        colors_sets.map((index,i)=>{
 
-      if(index.color_type===ColorName)
-      {
-        setSelectedColor([index.name])
-        // console.log(index[i]);
-      } 
-     
-    })
-  }
-
-
-  
-
+          if(index.color_type===ColorName)
+          {
+            setSelectedColor([index.name])
+            // console.log(index[i]);
+          } 
+        
+        })
+      }
 
   const menuItemsJSX = menuItems.map((item, index) => {
     const isItemSelected = selected === item.name;

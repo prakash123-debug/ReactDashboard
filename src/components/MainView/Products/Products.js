@@ -147,11 +147,7 @@ const Products =()=>{
       password:"",
       confirmPassword:"",
     }}
-    onSubmit={(values, actions) => {
-      setTimeout(() => {
-        alert(JSON.stringify(values, null, 2));
-        actions.setSubmitting(false);
-      }, 1000);}}
+  
     validationSchema={validate}
     
     >
