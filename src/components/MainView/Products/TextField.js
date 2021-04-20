@@ -20,22 +20,19 @@ const TextField=({label,...props})=>{
     //     <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
     //   </div>
     <>
-    <div className='input-group  mb-3'>
+    {/* <div className='input-group  mb-3'>
 
         <div className="input-group-prepend">
             <span className="input-group-text" id='basic-addon1'><BsPersonFill></BsPersonFill></span>
         </div>
         <input  className={`form-control shadow-none ${meta.touched && meta.error && 'is-invalid'} `}   aria-label="Small" aria-describedby="Username"></input>
        
-    </div>
-  <span className="error mb-5">
-  <ErrorMessage name={field.name} />
-  </span>
-      </>  
+    </div> */}
+  
 
 
   
-          /* <Col md="12">
+        <Col md="12">
           <label htmlFor={field.name}>{label}</label>
           <input 
           className={`form-control shadow-none ${meta.touched && meta.error && 'is-invalid'} `}
@@ -45,7 +42,8 @@ const TextField=({label,...props})=>{
         <span className="error mb-5">
           <ErrorMessage name={field.name} />
           </span>
-          </Col> */
+          </Col> 
+      </>  
      
     )
 }

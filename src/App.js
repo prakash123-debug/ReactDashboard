@@ -3,6 +3,7 @@ import * as s from './App.styles';
 import * as Palette from './colors'
 import { Container,Row,Col } from 'react-bootstrap';
 import Header from './components/Header/Header'
+import Login from './components/Login/Login'
 
 // Components
 import Sidebar from './components/Sidebar/Sidebar';
@@ -39,6 +40,7 @@ const App = () => {
 
   return (
     <>
+    {/* <Login/> */}
    <Header   backgroundImage={backgroundImage}
         sidebarHeader={sidebarHeader}
         menuItems={menuItems}
