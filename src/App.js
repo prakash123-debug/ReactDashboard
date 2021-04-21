@@ -40,8 +40,8 @@ const App = () => {
 
   return (
     <>
-    {/* <Login/> */}
-   <Header   backgroundImage={backgroundImage}
+    <Login/>
+   {/* <Header   backgroundImage={backgroundImage}
         sidebarHeader={sidebarHeader}
         menuItems={menuItems}
         fonts={fonts}
@@ -56,7 +56,7 @@ const App = () => {
         colorPalette={Palette.julyBlue}
       />
       <MainView />
-    </s.App>
+    </s.App> */}
     </>
   );
 }
