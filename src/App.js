@@ -4,17 +4,33 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  useHistory
 } from "react-router-dom";
-
-
-
 // Components
 import Dashboard from './components/MainView/Dashboard'
 import ProtectedRoute from './components/ProtectedRoutes/ProtectedRoutes';
-const App = () => {
-const[isAuth,setisAuth]=useState(true)
 
+
+const App = () => {
+  let history = useHistory();
+
+  const[isAuth,setisAuth]=useState(false)
+
+  useEffect(() => {
+    if(localStorage.token)
+    {
+    setisAuth(true);
+    history.push('/dashboard');
+
+    }
+    else
+    {
+      console.log('something');
+    }
+    });
+
+    
 
   return (
     <>
@@ -22,9 +38,6 @@ const[isAuth,setisAuth]=useState(true)
     <Switch>
       <Route exact path='/' component={Login}></Route>
       <ProtectedRoute path='/dashboard' component={Dashboard} isAuth={isAuth} />
-
-      {/* <Route exact path='/dashboard' component={Dashboard} /> */}
-
       </Switch>
     </>
   );

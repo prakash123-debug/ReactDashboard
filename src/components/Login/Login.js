@@ -27,6 +27,8 @@ const validate = values => {
   };
 
 const Login = ()=>{
+  let history = useHistory();
+
   // const [Email,SetEmail]=useState('');
   // const [Password,SetPassword]=useState('');
   // const[allEntry,setAllEntry]=useState([]);
@@ -53,19 +55,13 @@ const Login = ()=>{
           // console.log(data);
           axios.post('http://localhost:5000/api/user/login',data)
           .then(res=>{
-            console.log(res.data.accessToken)
+            history.push('/dashboard');
             localStorage.setItem('token',res.data.accessToken);
+            
           })
           .catch((error) => {
             setbackenderror(true)
         });
-          // console.log(values.email);
-          
-          // axios.post('https://reqres.in/api/articles', article)
-          // .then(response => this.setState({ articleId: response.data.id }));
-          //  submitform()
-            
-          // alert(JSON.stringify(values, null, 2));
         },
       });
    
@@ -80,11 +76,6 @@ const Login = ()=>{
                 <button type="button" onclick={()=>{setbackenderror(false)}} className="close" data-dismiss="alert">&times;</button>
           </div>
                   ) : null}
-          
-
-            
-
-         
                
             <div className="container position-fixed ">
          
@@ -140,7 +131,7 @@ const Login = ()=>{
                                     <input type="checkbox"/>Remember Me
                                 </div>
                                 <div className="form-group">
-                                    <input type="submit" value="Login" className="btn float-right login_btn" />
+                                    <input type="submit" value="Login" className="btn btn-success float-right login_btn" />
                                 </div>
                             </form>
                           

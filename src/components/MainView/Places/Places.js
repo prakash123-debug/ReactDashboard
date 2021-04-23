@@ -23,6 +23,10 @@ const Places = () => {
         initialValues: {
             category_name: '',
             subcategory_name: '',
+            longitude:'',
+            latitude:'',
+            picture:'',
+            video:''
         },
         validate,
 
@@ -38,7 +42,7 @@ const Places = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const [crumbs, setCrumbs] = useState(['Home', 'SubCategory']);
+    const [crumbs, setCrumbs] = useState(['Home', 'Places']);
     const selected = crumb => {
         console.log(crumb);
     }
@@ -154,22 +158,7 @@ const Places = () => {
                         </div>
                         {formik.touched.subcategory_name && formik.errors.subcategory_name ? (
                             <div> <span className="error">{formik.errors.subcategory_name}</span><br></br></div>) : null}
-                                                 <div className="block-content">
-                            <div className="form-group">
-                                <label for="w-10">Latitude</label><sup className="text-danger">*</sup>
-                                <div className="input-group">
-                                  
-                                    <input type="file"
-                                        className="form-control"
-                                        name="latitude"
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        value={formik.values.latitude}
-                                        autoComplete="off"
-                                        placeholder="Please enter subcategory  name" />
-                                </div>
-                            </div>
-                        </div>
+
                         <div className="block-content">
                             <div className="form-group">
                                 <label for="w-10">Latitude</label><sup className="text-danger">*</sup>
@@ -193,7 +182,7 @@ const Places = () => {
                         {formik.touched.latitude && formik.errors.latitude ? (
                             <div> <span className="error">{formik.errors.latitude}</span><br></br></div>
                         ) : null}
-                            <div className="block-content">
+                        <div className="block-content">
                             <div className="form-group">
                                 <label for="w-10">Longitude</label><sup className="text-danger">*</sup>
                                 <div className="input-group">
@@ -216,7 +205,51 @@ const Places = () => {
                         {formik.touched.longitude && formik.errors.longitude ? (
                             <div> <span className="error">{formik.errors.longitude}</span><br></br></div>
                         ) : null}
-                        
+
+                       <div className="block-content">
+                            <div class="form-group ">
+                                <label for="wizard-validation-classic-picture">Picture</label><sup class="text-danger">*</sup>
+                                <div className="custom-file">
+                                <input type="file"
+                                  className="form-control"
+                                  name="picture"
+                                  onChange={formik.handleChange}
+                                  onBlur={formik.handleBlur}
+                                  value={formik.values.picture}
+                                  autoComplete="off"
+                                  placeholder="Please enter subcategory  name" />
+
+                                    <label className="custom-file-label" for="wizard-validation-classic-attachment">Choose Picture</label>
+                                </div>
+                            </div>
+                        </div>
+                        {formik.touched.picture && formik.errors.picture ? (
+                            <div> <span className="error">{formik.errors.picture}</span><br></br></div>
+                        ) : null}
+
+                            <div className="block-content">
+                            <div class="form-group ">
+                                <label for="wizard-validation-classic-picture">Video</label><sup class="text-danger">*</sup>
+                                <div className="custom-file">
+                                <input type="file"
+                                  className="form-control"
+                                  name="video"
+                                  onChange={formik.handleChange}
+                                  onBlur={formik.handleBlur}
+                                  value={formik.values.video}
+                                  autoComplete="off"
+                                  placeholder="Please enter subcategory  name" />
+
+                                    <label className="custom-file-label" for="wizard-validation-classic-attachment">Choose video</label>
+                                </div>
+                            </div>
+                        </div>
+                        {formik.touched.video && formik.errors.video ? (
+                            <div> <span className="error">{formik.errors.video}</span><br></br></div>
+                        ) : null}
+
+                 
+
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
