@@ -253,7 +253,7 @@ const [selectedColor,setSelectedColor]=useState([colors_sets[3].name])
       </s.TogglerContainer>
     </s.SidebarContainer>
    
-         <div>
+         {/* <div>
        <button className="AllColorsStyleDiv" style={{backgroundImage: `linear-gradient(${colorPalette.bgColor1}, ${colorPalette.bgColor2})` }} onClick={ShowOrHideDiv} type="button"  title=" Click to Change Font"><FaPalette></FaPalette></button>
          <div className={visible}>
                 {
@@ -264,7 +264,7 @@ const [selectedColor,setSelectedColor]=useState([colors_sets[3].name])
                   })
                 }
          </div>
-   </div>  
+   </div>   */}
    <Footer backgroundImage={backgroundImage} isSidebarOpen={isSidebarOpen} colorPalette={colorPalette} ></Footer> 
     </>
     

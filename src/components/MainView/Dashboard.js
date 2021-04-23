@@ -7,6 +7,7 @@ import {withRouter} from "react-router-dom";
 import MainView from './MainView';
 import { Switch, Route } from 'react-router-dom';
 
+import * as sa from './MainView.styles';
 
 //components
 
@@ -16,8 +17,10 @@ import Country from './Destinations/Country/Country';
 import Blog from './Blog/Blog';
 import Services from './Services/Services';
 import Contacts from './Contacts/Contacts';
-import Products from './Products/Products';
-
+import Home from './Home/Home';
+import Category from './Category/Category';
+import SubCategory from './SubCategory/SubCategory'
+import Places from './Places/Places'
 
 const Dashboard = ({history,location,match}) => {
   // console.log(history);
@@ -30,9 +33,11 @@ const Dashboard = ({history,location,match}) => {
   };
 
   const menuItems = [
-    {name: 'Home', to: '/', icon: '/icons/home.svg', subMenuItems: [] },
-    {name:'Products',to :'dashboard/products', icon:'/icons/home.svg',subMenuItems:[]},
-    {name: 'About', to: 'dashboard/about', icon: '/icons/about.svg', subMenuItems: [] },
+    {name: 'Home', to: `${match.path}`, icon: '/icons/home.svg', subMenuItems: [] },
+    {name: 'Category', to: `${match.path}/category`, icon: '/icons/home.svg', subMenuItems: [] },
+    {name:'SubCategory',to :`${match.path}/subcategory`, icon:'/icons/home.svg',subMenuItems:[]},
+    {name:'Places',to :`${match.path}/places`, icon:'/icons/home.svg',subMenuItems:[]},
+    {name: 'About', to: `${match.path}/about`, icon: '/icons/about.svg', subMenuItems: [] },
     {name: 'Destinations', to: '/destinations', icon: '/icons/destinations.svg', 
       subMenuItems: [
         { name: 'Canada', to: '/canada'},        
@@ -42,9 +47,9 @@ const Dashboard = ({history,location,match}) => {
         { name: 'Kenya', to: '/kenya'},
         { name: 'Moldova', to: '/moldova'}
       ] },
-    {name: 'Blog', to: '/blog', icon: '/icons/blog.svg', subMenuItems: [] },
-    {name: 'Services', to: '/services', icon: '/icons/services.svg', subMenuItems: [] },
-    {name: 'Contacts', to: '/contacts', icon: '/icons/contacts.svg', subMenuItems: [] }
+    // {name: 'Blog', to: '/blog', icon: '/icons/blog.svg', subMenuItems: [] },
+    // {name: 'Services', to: '/services', icon: '/icons/services.svg', subMenuItems: [] },
+    // {name: 'Contacts', to: '/contacts', icon: '/icons/contacts.svg', subMenuItems: [] }
   ];
 
   const fonts = {
@@ -68,17 +73,19 @@ const Dashboard = ({history,location,match}) => {
         fonts={fonts}
         colorPalette={Palette.julyBlue}
       />
+         <sa.MainViewContainer>
         <Switch>
-      <Route exact path={`${match.path}/products`} component={Products} />
+      <Route exact path={`${match.path}`} component={Home} />
+      <Route exact path={`${match.path}/category`} component={Category} />
+      <Route exact path={`${match.path}/subcategory`} component={SubCategory} />
+      <Route exact path={`${match.path}/places`} component={Places} />
       <Route exact path={`${match.path}/about`} component={About} />
       <Route exact path={`${match.path}/destinations`} component={Destinations} />
       <Route exact path={`${match.path}/destinations/:country`} component={Country} />
-      <Route exact path={`${match.path}/destinations/:country`} component={Blog} />
-      <Route exact path='/services' component={Services} />
-      <Route exact path='/contacts' component={Contacts} />
     </Switch>
 
-  {/* <MainView/> */}
+    </sa.MainViewContainer>
+
     </s.App>
     </>
   )

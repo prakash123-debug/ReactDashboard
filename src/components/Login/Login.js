@@ -77,7 +77,7 @@ const Login = ()=>{
              {backend_error? (
               <div className='alert col-md-6 float-right w-40 alert-warning alert-dismissible'>
           <strong>Warning!</strong> please enter valid credintals
-                <button type="button" className="close" data-dismiss="alert">&times;</button>
+                <button type="button" onclick={()=>{setbackenderror(false)}} className="close" data-dismiss="alert">&times;</button>
           </div>
                   ) : null}
           

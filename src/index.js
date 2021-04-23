@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import axios from 'axios'
+import './Index.css'
 // import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import './Global.scss'
