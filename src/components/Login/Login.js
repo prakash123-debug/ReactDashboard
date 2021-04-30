@@ -3,8 +3,7 @@ import './LoginStyle.css'
 import { FaUserAlt,FaKey } from "react-icons/fa";
 import { useFormik } from 'formik';
 import { useHistory } from "react-router-dom";
-import axios from 'axios';
-
+import axiosInstance from "../Helpers/Axios"
 
 const validate = values => {
     const errors = {};
@@ -53,10 +52,10 @@ const Login = ()=>{
             password:values.password
           }
           // console.log(data);
-          axios.post('http://localhost:5000/api/user/login',data)
+          axiosInstance.post('api/user/login',data)
           .then(res=>{
-            history.push('/dashboard');
             localStorage.setItem('token',res.data.accessToken);
+            history.push('/dashboard');
             
           })
           .catch((error) => {

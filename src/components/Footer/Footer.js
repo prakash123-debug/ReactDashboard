@@ -9,6 +9,7 @@ const Footer =(props)=>{
              <s.FooterContainer  backgroundImage={props.backgroundImage} isSidebarOpen={props.isSidebarOpen}  colorPalette={props.colorPalette}>
                 <div className="FooterComponent">&copy;Copyright 2020. All Right Reserved</div>
             </s.FooterContainer>
+   
             </>
       )
 }

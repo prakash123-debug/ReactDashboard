@@ -78,7 +78,6 @@ const Dashboard = ({history,location,match}) => {
       <Route exact path={`${match.path}/places`} component={Places} />
       <Route exact path={`${match.path}/about`} component={About} />
       <Route exact path={`${match.path}/destinations`} component={Destinations} />
-      <Route exact path={`${match.path}/destinations/:country`} component={Country} />
     </Switch>
 
     </sa.MainViewContainer>

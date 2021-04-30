@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import Login from './components/Login/Login'
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -37,7 +38,7 @@ const App = () => {
     {/* <Login/> */}
     <Switch>
       <Route exact path='/' component={Login}></Route>
-      <ProtectedRoute path='/dashboard' component={Dashboard} isAuth={isAuth} />
+      <ProtectedRoute  path='/dashboard' component={Dashboard} isAuth={isAuth} />
       </Switch>
     </>
   );

@@ -1,6 +1,7 @@
 
 import styled from '@emotion/styled';
 export const HeaderContainer = styled.div`
+box-shadow: 0 10px 10px 0 green;
 width: ${p => p.isSidebarOpen ? '80%' : '94%'};
 height:60px;
 background-image: linear-gradient(
