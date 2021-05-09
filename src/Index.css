@@ -26,3 +26,11 @@
   .btn-circle {
     border-radius:50%;
   }
+  .BreadcrumbTitle{
+    height:60px;
+    align-items: center;
+    text-align: center;
+  }
+  .error{
+    color:red;
+  }

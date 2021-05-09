@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Container, Row, Col, Table, Button, Modal } from 'react-bootstrap';
-import { useFormik } from 'formik';
+import { Button, Modal } from 'react-bootstrap';
 import axiosInstance from '../../Helpers/Axios'
 import { BsListUl } from "react-icons/bs";
 import { Formik, ErrorMessage } from 'formik';
@@ -11,11 +10,9 @@ const Validate = Yup.object().shape({
     category_name: Yup.string()
       .required('Required'),
     sub_category_name: Yup.string()
-      .min(5, 'Too Short!')
-      .max(70, 'Too Long!')
       .required('Required'),
   });
-const EditSubCategoryModal = ({ shows, close, ModalData }) => {
+const EditPlacesModal = ({ shows, close, ModalData }) => {
     const [AllDataItem, SetAllItem] = useState({});
     const [notification, notificationError] = useState(false);
     const [btnDisable, SetbtnDisabled] = useState(false);
@@ -196,6 +193,6 @@ const EditSubCategoryModal = ({ shows, close, ModalData }) => {
     )
 }
 
-export default EditSubCategoryModal
+export default EditPlacesModal
 
 

@@ -1,7 +1,7 @@
 
-
-import React, { useState, useEffect, useCallback } from 'react';
-import {Button, Modal } from 'react-bootstrap';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
+import { Container, Row, Col, Table, Button, Modal } from 'react-bootstrap';
+import { useFormik } from 'formik';
 import axiosInstance from '../../Helpers/Axios'
 import { BsListUl } from "react-icons/bs";
 import { Formik, ErrorMessage } from 'formik';
@@ -9,19 +9,15 @@ import * as Yup from "yup";
 
 const Validate = Yup.object().shape({
 
-  category_name: Yup.string()
-    .required('Required'),
-  sub_category_name: Yup.string()
-    .min(5, 'Too Short!')
-    .max(70, 'Too Long!')
+  tag_name: Yup.string()
     .required('Required'),
 });
-const SubCategoryModal = ({ shows, close }) => {
+const TagModal = ({ shows, close }) => {
   // const [notification, notificationError] = useState(false);
   const [btnDisable, SetbtnDisabled] = useState(false);
   const [access_token, setAccessToken] = useState('');
   const [notification, notificationError] = useState('');
-  const [items, SetItems] = useState([]);
+
   useEffect(() => {
     if (localStorage.token) {
       setAccessToken(localStorage.token)
@@ -36,24 +32,7 @@ const SubCategoryModal = ({ shows, close }) => {
         notificationError(false)
       }, 4000);
     }
-    fetchingSubCategory();
-  }, [shows]);
-
-  const fetchingSubCategory = useCallback(async () => {
-    axiosInstance.get('/dashboard/category', {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${access_token}`
-      }
-    })
-      .then(res => {
-        SetItems(res.data)
-
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  })
+  });
 
 
   return (
@@ -61,19 +40,15 @@ const SubCategoryModal = ({ shows, close }) => {
 
 
       <Formik
-        initialValues={{
-          category_name: "",
-          sub_category_name: ""
-        }}
+        initialValues={{ tag_name: "" }}
         validationSchema={Validate}
 
         onSubmit={async (values, actions) => {
           const data = {
-            categoryId: values.category_name,
-            subCategoryName: values.sub_category_name
+            tagName: values.tag_name,
           }
 
-          await axiosInstance.post('/dashboard/subcategory', data, {
+          await axiosInstance.post('/dashboard/tag', data, {
             headers: {
               'Authorization': `token ${access_token}`
             }
@@ -88,8 +63,7 @@ const SubCategoryModal = ({ shows, close }) => {
 
           actions.resetForm({
             values: {
-              category_name: '',
-              sub_category_name: ''
+              tag_name: ''
             },
           });
         }}
@@ -109,44 +83,12 @@ const SubCategoryModal = ({ shows, close }) => {
             ) : null}
             <form onSubmit={props.handleSubmit}>
               <Modal.Header>
-                <Modal.Title>SubCategory</Modal.Title>
+                <Modal.Title>Tags</Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <div className="block-content">
                   <div className="form-group">
-                    <label for="w-10">Select Category </label><sup className="text-danger">*</sup>
-                    <div className="input-group">
-                      <div className="input-group-prepend">
-                        <span className="input-group-text">
-                          <BsListUl />
-                        </span>
-                      </div>
-                      <select
-                        className="form-control"
-                        name="category_name"
-                        onChange={props.handleChange}
-                        onBlur={props.handleBlur}
-                        value={props.values.category_name}
-                        autoComplete="off"
-                      >
-                        <option >Select Category</option>
-                        {
-                          items.map((index, i) => {
-                            return (
-                              <option value={index.id}>{index.categoryName}</option>
-
-                            )
-                          })
-                        }
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <span className="error"><ErrorMessage name="category_name" /></span>
-
-                <div className="block-content">
-                  <div className="form-group">
-                    <label for="w-10">Sub Category Name </label><sup className="text-danger">*</sup>
+                    <label for="w-10">Tag Name</label><sup className="text-danger">*</sup>
                     <div className="input-group">
                       <div className="input-group-prepend">
                         <span className="input-group-text">
@@ -155,17 +97,16 @@ const SubCategoryModal = ({ shows, close }) => {
                       </div>
                       <input type="text"
                         className="form-control"
-                        name="sub_category_name"
+                        name="tag_name"
                         onChange={props.handleChange}
                         onBlur={props.handleBlur}
-                        value={props.values.sub_category_name}
+                        value={props.values.tag_name}
                         autoComplete="off"
-                        placeholder="Please enter category name" />
+                        placeholder="Please enter tag name" />
                     </div>
                   </div>
                 </div>
-                <span className="error"><ErrorMessage name="sub_category_name" /></span>
-
+                <span className="error"><ErrorMessage name="tag_name" /></span>
               </Modal.Body>
               <Modal.Footer>
                 <Button variant="secondary" onClick={close}>
@@ -180,8 +121,10 @@ const SubCategoryModal = ({ shows, close }) => {
       </Formik>
     </>
   )
+
+
 }
 
-export default SubCategoryModal
+export default TagModal
 
 

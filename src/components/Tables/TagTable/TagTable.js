@@ -2,11 +2,11 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Pagination from '../../Pagination/Pagination'
 import { Row, Table } from 'react-bootstrap';
 import axiosInstance from '../../Helpers/Axios'
-import EditSubCategoryModal from '../../Modals/SubCategoryModal/EditSubCategoryModal';
+import EditTagModal from '../../Modals/TagModal/EditTagModal';
 import DeleteAllTableItems from '../../Modals/DeleteAllTableItems/DeleteAllTableItems';
 import { BsTrash } from "react-icons/bs";
 
-function SubCategoryTable({ show }) {
+function TagTable({ show }) {
   const [ModalData, GetModalData] = useState('');
   const [OpenEditModal, handleOpenEditModal] = useState(false);
   const closeModalHandler = () => handleOpenEditModal(false);
@@ -26,11 +26,11 @@ function SubCategoryTable({ show }) {
   const [postPerPage] = useState(4);
   useEffect(() => {
     changePopupOpen(show)
-    fetchingPosts();
+    fetchingTag();
   }, [show, OpenEditModal, OpenDeleteModal])
 
-  const fetchingPosts = useCallback(async () => {
-    axiosInstance.get('/dashboard/subcategory', {
+  const fetchingTag = useCallback(async () => {
+    axiosInstance.get('/dashboard/tag', {
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${access_token}`
@@ -52,7 +52,6 @@ function SubCategoryTable({ show }) {
   const CurrentPosts = items.slice(indexofFirstPost, indexOfLastPost);
 
   const paginate = pageNumber => setCurrentPage(pageNumber);
-
     return (
       <>
         <Row className="BreadcrumbStyle mt-4">
@@ -60,8 +59,7 @@ function SubCategoryTable({ show }) {
             <thead>
               <tr>
                 <th>SN</th>
-                <th>Category Name</th>
-                <th>Sub Category Name</th>
+                <th>Tag Name</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -78,8 +76,7 @@ function SubCategoryTable({ show }) {
                     }
                     } key={index.id} value={index.id}>
                       <td>{i + 1}</td>
-                      <td>{index.category.categoryName}</td>
-                      <td>{index.subCategoryName}</td>
+                      <td>{index.tagName}</td>
                       <td onClick={() => {
                         handleOpenDeleteModal(true)
                         GetDeleteModalId(index.id)
@@ -99,11 +96,12 @@ function SubCategoryTable({ show }) {
         <div className="float-right mt-2">
           <Pagination paginate={paginate} postPerPage={postPerPage} totalPoste={items.length} />
         </div>
-        <EditSubCategoryModal shows={OpenEditModal} ModalData={ModalData} close={closeModalHandler} />
-        <DeleteAllTableItems shows={OpenDeleteModal} ModalId={ModalId} ModalName="subcategory" close={closeDeleteModalHandler} />
+        <EditTagModal shows={OpenEditModal} ModalData={ModalData} close={closeModalHandler} />
+        <DeleteAllTableItems shows={OpenDeleteModal} ModalId={ModalId} ModalName="tag" close={closeDeleteModalHandler} />
       </>
     );
+ 
 
 }
 
-export default SubCategoryTable;
+export default TagTable;

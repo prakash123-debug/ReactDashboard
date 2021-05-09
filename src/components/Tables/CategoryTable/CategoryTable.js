@@ -2,18 +2,17 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Pagination from '../../Pagination/Pagination'
 import { Row, Table } from 'react-bootstrap';
 import axiosInstance from '../../Helpers/Axios'
-import EditSubCategoryModal from '../../Modals/SubCategoryModal/EditSubCategoryModal';
+import EditCategoryModal from '../../Modals/CategoryModal/EditCategoryModal';
 import DeleteAllTableItems from '../../Modals/DeleteAllTableItems/DeleteAllTableItems';
 import { BsTrash } from "react-icons/bs";
 
-function SubCategoryTable({ show }) {
+function CategoryTable({ show }) {
   const [ModalData, GetModalData] = useState('');
   const [OpenEditModal, handleOpenEditModal] = useState(false);
   const closeModalHandler = () => handleOpenEditModal(false);
-  const [loading,setloading]=useState(false);
   const [OpenDeleteModal, handleOpenDeleteModal] = useState(false);
   const closeDeleteModalHandler = () => handleOpenDeleteModal(false);
-  const [ModalId, SetModalId] = useState('')
+  const [ModalId, SetModalId] = useState('');
 
   const GetDeleteModalId = (id) => {
     SetModalId(id);
@@ -26,18 +25,17 @@ function SubCategoryTable({ show }) {
   const [postPerPage] = useState(4);
   useEffect(() => {
     changePopupOpen(show)
-    fetchingPosts();
+    fetchingCategory();
   }, [show, OpenEditModal, OpenDeleteModal])
 
-  const fetchingPosts = useCallback(async () => {
-    axiosInstance.get('/dashboard/subcategory', {
+  const fetchingCategory = useCallback(async () => {
+    axiosInstance.get('/dashboard/category', {
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${access_token}`
       }
     })
       .then(res => {
-        setloading(true)
         SetItems(res.data)
 
       })
@@ -47,12 +45,12 @@ function SubCategoryTable({ show }) {
   })
 
 
+
   const indexOfLastPost = CurrentPage * postPerPage;
   const indexofFirstPost = indexOfLastPost - postPerPage;
   const CurrentPosts = items.slice(indexofFirstPost, indexOfLastPost);
 
   const paginate = pageNumber => setCurrentPage(pageNumber);
-
     return (
       <>
         <Row className="BreadcrumbStyle mt-4">
@@ -61,7 +59,6 @@ function SubCategoryTable({ show }) {
               <tr>
                 <th>SN</th>
                 <th>Category Name</th>
-                <th>Sub Category Name</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -78,8 +75,7 @@ function SubCategoryTable({ show }) {
                     }
                     } key={index.id} value={index.id}>
                       <td>{i + 1}</td>
-                      <td>{index.category.categoryName}</td>
-                      <td>{index.subCategoryName}</td>
+                      <td>{index.categoryName}</td>
                       <td onClick={() => {
                         handleOpenDeleteModal(true)
                         GetDeleteModalId(index.id)
@@ -99,11 +95,12 @@ function SubCategoryTable({ show }) {
         <div className="float-right mt-2">
           <Pagination paginate={paginate} postPerPage={postPerPage} totalPoste={items.length} />
         </div>
-        <EditSubCategoryModal shows={OpenEditModal} ModalData={ModalData} close={closeModalHandler} />
-        <DeleteAllTableItems shows={OpenDeleteModal} ModalId={ModalId} ModalName="subcategory" close={closeDeleteModalHandler} />
+        <EditCategoryModal shows={OpenEditModal} ModalData={ModalData} close={closeModalHandler} />
+        <DeleteAllTableItems shows={OpenDeleteModal}  ModalId={ModalId} ModalName="category" close={closeDeleteModalHandler} />
       </>
     );
+ 
 
 }
 
-export default SubCategoryTable;
+export default CategoryTable;

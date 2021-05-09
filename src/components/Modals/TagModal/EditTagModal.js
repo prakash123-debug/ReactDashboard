@@ -6,14 +6,14 @@ import { BsListUl } from "react-icons/bs";
 import { Formik, ErrorMessage } from 'formik';
 import * as Yup from "yup";
 
-const Validate = Yup.object().shape({
+const SignupSchema = Yup.object().shape({
 
-    category_name: Yup.string()
+    tag_name: Yup.string()
         .min(5, 'Too Short!')
         .max(70, 'Too Long!')
         .required('Required'),
 });
-const EditCategoryModal = ({ shows, items, close, ModalData }) => {
+const EditTagModal = ({ shows, items, close, ModalData }) => {
     const [AllDataItem, SetAllItem] = useState({});
     const [notification, notificationError] = useState(false);
     const [btnDisable, SetbtnDisabled] = useState(false);
@@ -43,25 +43,19 @@ const EditCategoryModal = ({ shows, items, close, ModalData }) => {
     if (AllDataItem) {
         return (
             <>
-            {console.log(AllDataItem.categoryImage)}
 
 
                 <Formik
-                    initialValues={{ 
-                        category_name: AllDataItem.categoryName,
-                        categoryImage: AllDataItem.categoryImage
-                     }}
-                    validationSchema={Validate}
+                    initialValues={{ tag_name: AllDataItem.tagName }}
+                    validationSchema={SignupSchema}
 
                     onSubmit={async (values, actions) => {
-                        let formdata = new FormData();
-                        formdata.append('categoryName',values.category_name)
-                        formdata.append('categoryImage',values.categoryImage)
-                        // const data = {
-                        //     categoryName: values.category_name,
-                        // }
+                        const data = {
+                            tagName: values.tag_name,
+                        }
+                    
 
-                        await axiosInstance.patch(`/dashboard/category/${AllDataItem.id}`, formdata, {
+                        await axiosInstance.patch(`/dashboard/tag/${AllDataItem.id}`, data, {
                             headers: {
                                 'Authorization': `token ${access_token}`
                             }
@@ -76,8 +70,7 @@ const EditCategoryModal = ({ shows, items, close, ModalData }) => {
 
                         actions.resetForm({
                             values: {
-                                category_name: '',
-                                categoryImage:''
+                                tag_name: ''
                             },
                         });
                     }}
@@ -113,34 +106,17 @@ const EditCategoryModal = ({ shows, items, close, ModalData }) => {
                                                 </div>
                                                 <input type="text"
                                                     className="form-control"
-                                                    name="category_name"
+                                                    name="tag_name"
                                                     onChange={props.handleChange}
                                                     onBlur={props.handleBlur}
-                                                    initialValue={AllDataItem.categoryName}
-                                                    value={props.values.category_name}
+                                                    initialValue={AllDataItem.tagName}
+                                                    value={props.values.tag_name}
                                                     autoComplete="off"
                                                     placeholder="Please enter category name" />
                                             </div>
                                         </div>
                                     </div>
-                                    <span className="error"><ErrorMessage name="category_name" /></span>
-                                    <div className="block-content">
-                                        <div className="form-group">
-                                        <label for="w-10">Select Category Image</label><sup className="text-danger">*</sup>
-                                        <div className="input-group">
-                                            <input type="file"
-                                            name="categoryImage"
-                                            onChange={(event) => props.setFieldValue("categoryImage", event.target.files[0])}
-                                            onBlur={props.handleBlur}
-                                            multiple
-                                            autoComplete="off"
-                                            placeholder="Please enter category name"
-                                            />
-                                        </div>
-                                        </div>
-                                        <span className="error"><ErrorMessage name="categoryImage" /></span>
-
-                                    </div>
+                                    <span className="error"><ErrorMessage name="tag_name" /></span>
                                 </Modal.Body>
                                 <Modal.Footer>
                                     <Button variant="secondary" onClick={close}>
@@ -164,6 +140,6 @@ const EditCategoryModal = ({ shows, items, close, ModalData }) => {
     )
 }
 
-export default EditCategoryModal
+export default EditTagModal
 
 
