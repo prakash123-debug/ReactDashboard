@@ -2,11 +2,11 @@ import React, { useState} from 'react';
 import Breadcrumb from '../../BreadCrumb/Breadcrumb';
 import {Row, Col,Button} from 'react-bootstrap';
 import { BsFillPlusCircleFill} from "react-icons/bs";
-import PlacesModal from '../../Modals/PlacesModal/PlacesModal';
-import PlacesTable from '../../Tables/PlaceTable/PlacesTable';
+import TagTable from '../../Tables/TagTable/TagTable'
+import TagModal from '../../Modals/TagModal/TagModal';
 
-const Places = () => {
-  const [crumbs, setCrumbs] = useState(['Home', 'Places']);
+const Tag = () => {
+  const [crumbs, setCrumbs] = useState(['Home', 'Tags']);
   const selected = crumb => {
     console.log(crumb);
   }
@@ -27,9 +27,9 @@ const Places = () => {
                 </Col>
             </Row>
      
-      <PlacesTable show={shows} />  
- <PlacesModal shows={shows} close={closeModalHandler}/>  
+      <TagTable show={shows} />  
+ <TagModal shows={shows} close={closeModalHandler}/>  
     </>
   )
 }
-export default Places;
+export default Tag;

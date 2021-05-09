@@ -21,11 +21,7 @@ const Breadcrumb=(props)=>{
                    <button className={`btn btn-link ${disabled} `} onClick={()=>props.selected(crumb)}>
                     {crumb}
                 </button>
-          
-                    // <li key={ci}  className="breadcrumb-item align-item-center"
-                    // >
-                    
-                    // </li>
+        
                 )
             })
         }

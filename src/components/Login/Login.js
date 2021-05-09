@@ -1,4 +1,4 @@
-import React,{ useState, useEffect, useLayoutEffect }  from 'react';
+import React,{ useState}  from 'react';
 import './LoginStyle.css'
 import { FaUserAlt,FaKey } from "react-icons/fa";
 import { useFormik } from 'formik';
@@ -52,10 +52,12 @@ const Login = ()=>{
             password:values.password
           }
           // console.log(data);
-          axiosInstance.post('api/user/login',data)
+          axiosInstance.post('dashboard/user/login',data)
           .then(res=>{
             localStorage.setItem('token',res.data.accessToken);
             history.push('/dashboard');
+            window.location.reload(false);
+
             
           })
           .catch((error) => {
@@ -136,12 +138,12 @@ const Login = ()=>{
                           
                         </div>
                        
-                        <div className="card-footer">
+                        {/* <div className="card-footer">
                             <div className="d-flex justify-content-center links">
                                 Don't have an account?<a href="#">Sign Up</a>
                                 
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
            

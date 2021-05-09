@@ -1,6 +1,6 @@
-import React,{useRef,useEffect,useState} from 'react';
+import React from 'react';
 import './HomeStyle.css';
-import {Container,Row,Col} from 'react-bootstrap';
+import {Col} from 'react-bootstrap';
 
 
 const Home = () => {

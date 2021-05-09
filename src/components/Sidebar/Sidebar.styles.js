@@ -16,6 +16,7 @@ width:100%;
  background-repeat: no-repeat;
  background-position: center center;
  position:fixed;
+ box-shadow: 0 5px 5px 0 rgb(0 0 0 / 20%);
 `
 
 
@@ -35,6 +36,7 @@ export const SidebarContainer = styled.div`
   color: ${p => p.colorPalette.fontColorSelected};
   position: relative; // Toggler
   transition: .2s ease-in all
+  box-shadow: 0 5px 5px 0 rgb(0 0 0 / 20%);
 `
 export const searchcomponent =styled.div
 `

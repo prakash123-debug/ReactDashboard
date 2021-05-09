@@ -1,52 +1,33 @@
-import React,{useState} from 'react';
+import React from 'react';
 import * as s from '../../App.styles';
 import * as Palette from '../../colors'
 import Header from '../Header/Header'
 import Sidebar from '../Sidebar/Sidebar';
 import {withRouter} from "react-router-dom";
-import MainView from './MainView';
 import { Switch, Route } from 'react-router-dom';
 
 import * as sa from './MainView.styles';
 
 //components
 
-import About from './About/About';
-import Destinations from './Destinations/Destinations';
-import Country from './Destinations/Country/Country';
-import Blog from './Blog/Blog';
-import Services from './Services/Services';
-import Contacts from './Contacts/Contacts';
 import Home from './Home/Home';
 import Category from './Category/Category';
 import SubCategory from './SubCategory/SubCategory'
 import Places from './Places/Places'
-
+import Tag from './Tag/Tag';
 const Dashboard = ({history,location,match}) => {
-  // console.log(history);
-  // console.log(location);
-  console.log(match);
   const backgroundImage = 'images/mountain.jpg';
   const sidebarHeader = {
     fullName: 'Bootwal R&D',
     shortName: 'R&D'
   };
 
-  const menuItems = [
-    {name: 'Home', to: `${match.path}`, icon: '/icons/home.svg', subMenuItems: [] },
-    {name: 'Category', to: `${match.path}/category`, icon: '/icons/home.svg', subMenuItems: [] },
-    {name:'SubCategory',to :`${match.path}/subcategory`, icon:'/icons/home.svg',subMenuItems:[]},
-    {name:'Places',to :`${match.path}/places`, icon:'/icons/home.svg',subMenuItems:[]},
-    {name: 'About', to: `${match.path}/about`, icon: '/icons/about.svg', subMenuItems: [] },
-    {name: 'Destinations', to: '/destinations', icon: '/icons/destinations.svg', 
-      subMenuItems: [
-        { name: 'Canada', to: '/canada'},        
-        { name: 'Brazil', to: '/brazil'},
-        { name: 'India', to: '/india'},
-        { name: 'Australia', to: '/australia'},
-        { name: 'Kenya', to: '/kenya'},
-        { name: 'Moldova', to: '/moldova'}
-      ] },
+  const menuItems = [ 
+    {name: 'Home', to: `${match.path}`, icon: '/icons/home.svg'},
+    {name: 'Category', to: `${match.path}/category`, icon: '/icons/home.svg'},
+    {name:'SubCategory',to :`${match.path}/subcategory`, icon:'/icons/home.svg'},
+    {name:'Places',to :`${match.path}/places`, icon:'/icons/home.svg'},
+    {name:'tags',to :`${match.path}/tags`, icon:'/icons/home.svg'},
   ];
 
   const fonts = {
@@ -57,9 +38,6 @@ const Dashboard = ({history,location,match}) => {
   
     <>
     <Header   backgroundImage={backgroundImage}
-        sidebarHeader={sidebarHeader}
-        menuItems={menuItems}
-        fonts={fonts}
         colorPalette={Palette.julyBlue} ></Header>
      <s.App>
       
@@ -76,8 +54,7 @@ const Dashboard = ({history,location,match}) => {
       <Route exact path={`${match.path}/category`} component={Category} />
       <Route exact path={`${match.path}/subcategory`} component={SubCategory} />
       <Route exact path={`${match.path}/places`} component={Places} />
-      <Route exact path={`${match.path}/about`} component={About} />
-      <Route exact path={`${match.path}/destinations`} component={Destinations} />
+      <Route exact path={`${match.path}/tags`} component={Tag} />
     </Switch>
 
     </sa.MainViewContainer>
