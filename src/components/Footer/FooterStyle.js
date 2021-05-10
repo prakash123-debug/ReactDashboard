@@ -12,9 +12,10 @@ width: 100%;
  background-size: cover;
  background-repeat: no-repeat;
  background-position: center center;
-    position: absolute;
-    bottom: 0px;
-    box-shadow: 0 5px 5px 0 rgb(0 0 0 / 20%);
+display:flex;
+position:fixed;
+bottom: 0px;
+ box-shadow: 0 5px 5px 0 rgb(0 0 0 / 20%);
  
 `
 

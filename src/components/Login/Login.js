@@ -80,7 +80,7 @@ const Login = ()=>{
                
             <div className="container position-fixed ">
          
-                <div className="d-flex  justify-content-center text-center h-100">
+                <div style={{marginLeft:"255px"}} className="d-flex  justify-content-center text-center h-100">
                     <div className="card">
                         <div className="card-header">
                         

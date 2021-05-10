@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 export const HeaderContainer = styled.div`
+z-index: 99;
 width:100%;
  height:60px;
  background-image: linear-gradient(
@@ -13,7 +14,6 @@ width:100%;
  top:0; right:0; 
  transition: .2s ease-in all
  background-size: cover;
- background-repeat: no-repeat;
  background-position: center center;
  position:fixed;
  box-shadow: 0 5px 5px 0 rgb(0 0 0 / 20%);
@@ -53,9 +53,10 @@ color: ${p => p.colorPalette.fontColorSelected};
 
 
 export const SidebarHeader = styled.h3`
+  margin-top:40px;
   padding: 20px 0;
   text-align: center;
-  margin-bottom: 10px;
+ 
   letter-spacing: 6px;
   font-family: ${p => p.font}
 `
@@ -152,7 +153,8 @@ export const TogglerContainer = styled.div`
 `
 
 export const Toggler = styled.div`
-    height: 40px;
+    height: 100px;
+   
     cursor: pointer;
     position: cursor; // horizontal lines
     &:after {
