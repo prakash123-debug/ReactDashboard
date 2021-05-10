@@ -1,26 +1,21 @@
-
-
 import React, { useState, useEffect, useCallback } from 'react';
-import { Container, Row, Col, Table, Button, Modal } from 'react-bootstrap';
-import { useFormik } from 'formik';
-import axiosInstance from '../../Helpers/Axios'
+import Breadcrumb from '../../BreadCrumb/Breadcrumb';
+import { Row, Col, Button } from 'react-bootstrap';
 import { BsListUl } from "react-icons/bs";
+import { Link } from 'react-router-dom';
 import { Formik, ErrorMessage } from 'formik';
 import * as Yup from "yup";
-import Select from 'react-select'
-import makeAnimated from 'react-select/animated';
-// import { TagsData } from './TagsData';
-// const animatedComponents = makeAnimated();
+import axiosInstance from '../../Helpers/Axios'
+import './PlaceStyle.css';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 const Validate = Yup.object().shape({
   categoryId: Yup.string()
     .required('Required'),
   subCategoryId: Yup.string()
     .required('Required'),
   placeName: Yup.string()
-    .max(70, 'Too Long!')
-    .required('Required'),
-  description: Yup.string()
-    .min(5, 'Too Short!')
     .max(70, 'Too Long!')
     .required('Required'),
   longitude: Yup.string()
@@ -36,23 +31,22 @@ const Validate = Yup.object().shape({
     .email('must be in email format')
     .required('Required'),
 });
-const PlacesModal = ({ shows, close }) => {
-  // const [notification, notificationError] = useState(false);
+const AddPlace = () => {
+  const access_token = localStorage.token;
+
   const [btnDisable, SetbtnDisabled] = useState(false);
-  const [access_token, setAccessToken] = useState('');
   const [notification, notificationError] = useState('');
   const [categoryItems, SetCategoryItems] = useState([]);
   const [SubCategoryItems, SetSubCategoryItems] = useState([]);
   const [TagItems, SetTagItems] = useState([]);
   const [catId, SetCatId] = useState('')
+  const [ckEditorData,setckEditorData]=useState('')
   // const [optionsData,SetTagData]=useState([
   //   {value:"abc",label:"def"}
   // ])
 
   useEffect(() => {
-    if (localStorage.token) {
-      setAccessToken(localStorage.token)
-    }
+
     if (btnDisable) {
       const timer = setTimeout(() => {
         SetbtnDisabled(false)
@@ -68,7 +62,7 @@ const PlacesModal = ({ shows, close }) => {
     fetchingTags();
 
 
-  }, [shows]);
+  }, []);
 
   const fetchingCategory = useCallback(async () => {
     axiosInstance.get('/dashboard/category', {
@@ -116,13 +110,28 @@ const PlacesModal = ({ shows, close }) => {
         console.log(error);
       });
   })
-
-
   const selectChange = (e) => {
     SetCatId(e.target.value);
   }
+  const [crumbs, setCrumbs] = useState(['Home', 'Places', 'AddPlace']);
+  const selected = crumb => {
+    console.log(crumb);
+  }
+
   return (
     <>
+      <Row className="BreadcrumbStyle BreadcrumbTitle" >
+        <Col md="12"  >
+          <Col md="10" className="float-left">
+            <Breadcrumb crumbs={crumbs} selected={selected}>
+            </Breadcrumb>
+          </Col>
+          <Col md="2" className="float-right mt-2">
+          </Col>
+        </Col>
+      </Row>
+      <div className="container-lg BreadcrumbStyle  mt-4">
+
       <Formik
         initialValues={{
           categoryId: "",
@@ -130,47 +139,32 @@ const PlacesModal = ({ shows, close }) => {
           placePhotos: [],
           placeVideos: [],
           tagId: [],
-          description: ""
         }}
         validationSchema={Validate}
 
         onSubmit={async (values, actions) => {
-          console.log(values);
-
           let formdata = new FormData();
           formdata.append('categoryId', values.categoryId)
           formdata.append('email', values.email)
           formdata.append('phoneNumber', values.phoneNumber)
           formdata.append('subCategoryId', values.subCategoryId)
-          formdata.append('description', values.description)
+          formdata.append('description', ckEditorData)
           formdata.append('latitude', values.latitude)
           formdata.append('longitude', values.longitude)
           formdata.append('placeName', values.placeName)
-          // formdata.append('placePhotos', values.placePhotos)
-          // formdata.append('placeVideos', values.placeVideos)
+          formdata.append('placePhotos', values.placePhotos)
+          formdata.append('placeVideos', values.placeVideos)
 
-          const roomPictures = values.placePhotos;
-          Array.from(roomPictures).forEach((file) => {
-            formdata.append('placePhotos', file);
-          });
+          // const roomPictures = values.placePhotos;
+          // Array.from(roomPictures).forEach((file) => {
+          //   formdata.append('placePhotos', file);
+          // });
 
-          const roomVideo = values.placeVideos;
-          Array.from(roomVideo).forEach((file) => {
-            formdata.append('placeVideos', file);
-          });
-          // const data = {
-          //   categoryId: values.categoryId,
-          //   subCategoryId: values.subCategoryId,
-          //   description: values.description,
-          //   latitude: values.latitude,
-          //   longitude: values.longitude,
-          //   placeName: values.placeName,
-          //   tagId: values.tagId,
-          //   phoneNumber:values.phoneNumber,
-          //   email:values.email
-          // }
-
-
+          // const roomVideo = values.placeVideos;
+          // Array.from(roomVideo).forEach((file) => {
+          //   formdata.append('placeVideos', file);
+          // });
+   
           await axiosInstance.post('/dashboard/place', formdata, {
             headers: {
               'contentType': 'multipart/form-data',
@@ -188,24 +182,9 @@ const PlacesModal = ({ shows, close }) => {
         }}
       >
         {props => (
-          <Modal
-            show={shows}
-            size="lg"
-            onHide={close}
-            backdrop="static"
-            keyboard={false}
-          >
-            {notification ? (
-              <div className='alert w-40 alert-success alert-dismissible'>
-                <strong>success!</strong> Data Updated Sucessfully
-                <button type="button" onClick={() => { notificationError(false) }} className="close" data-dismiss="alert">&times;</button>
-              </div>
-            ) : null}
+        
             <form onSubmit={props.handleSubmit} enctype="multipart/form-data">
-              <Modal.Header>
-                <Modal.Title>Places</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
+              
                 <div className="row">
                   <div className="block-content col-md-6">
                     <div className="form-group">
@@ -242,7 +221,6 @@ const PlacesModal = ({ shows, close }) => {
                     </div>
                     <span className="error"><ErrorMessage name="categoryId" /></span>
                   </div>
-
                   <div className="block-content col-md-6">
                     <div className="form-group">
                       <label for="w-10">Select SubCategory </label><sup className="text-danger">*</sup>
@@ -470,7 +448,7 @@ const PlacesModal = ({ shows, close }) => {
                     <span className="error"><ErrorMessage name="placeVideos" /></span>
                   </div>
 
-                  <div className="form-group col-md-12">
+                  {/* <div className="form-group col-md-12">
                     <label for="wizard-validation-classic-bio">Description</label>
                     <textarea
                       className="form-control"
@@ -481,27 +459,33 @@ const PlacesModal = ({ shows, close }) => {
                       autoComplete="off"
                       rows="5"></textarea>
                   </div>
-                  <span className="error"><ErrorMessage name="description" /></span>
+                  <span className="error"><ErrorMessage name="description" /></span> */}
                 </div>
-
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={close}>
-                  Close
-                                    </Button>
-                <Button type="submit" disabled={btnDisable} variant="primary" >Submit</Button>
-              </Modal.Footer>
+                <label for="wizard-validation-classic-bio">Description</label>
+                <CKEditor style={{height:"200px"}}
+                    editor={ ClassicEditor }
+                    data={ckEditorData}
+                   
+                    onChange={ ( event, editor ) => {
+                        const datas = editor.getData();
+                        setckEditorData(datas);
+                        // console.log( { event, editor, data } );
+                    } }
+                
+                />
+                <div className="form-group col-md-12">
+                <Button variant="secondary">
+                  Close </Button>               
+                <Button className="m-3" type="submit" disabled={btnDisable} variant="primary" >Submit</Button>
+                </div>
             </form>
-          </Modal>
 
         )}
       </Formik>
+      </div>
+
+
     </>
   )
-
-
 }
-
-export default PlacesModal
-
-
+export default AddPlace;
