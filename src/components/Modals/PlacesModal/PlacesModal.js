@@ -191,7 +191,7 @@ const PlacesModal = ({ shows, close }) => {
                 <div className="row">
                   <div className="block-content col-md-6">
                     <div className="form-group">
-                      <label htmlhtmlFor="w-10">Select Category </label>
+                      <label htmlFor="w-10">Select Category </label>
                       <sup className="text-danger">*</sup>
                       <div className="input-group">
                         <div className="input-group-prepend">
@@ -281,7 +281,7 @@ const PlacesModal = ({ shows, close }) => {
                           name="placeName"
                           onChange={props.handleChange}
                           onBlur={props.handleBlur}
-                          value={props.values.placeName}
+                          value={props.values.placeName || ""}
                           autoComplete="off"
                           placeholder="Please enter Place name"
                         />
@@ -307,7 +307,7 @@ const PlacesModal = ({ shows, close }) => {
                           name="phoneNumber"
                           onChange={props.handleChange}
                           onBlur={props.handleBlur}
-                          value={props.values.phoneNumber}
+                          value={props.values.phoneNumber || ""}
                           autoComplete="off"
                           placeholder="Please enter Phone Number"
                         />
@@ -333,7 +333,7 @@ const PlacesModal = ({ shows, close }) => {
                           name="email"
                           onChange={props.handleChange}
                           onBlur={props.handleBlur}
-                          value={props.values.email}
+                          value={props.values.email || ""}
                           autoComplete="off"
                           placeholder="Please enter email"
                         />
@@ -360,7 +360,7 @@ const PlacesModal = ({ shows, close }) => {
                           name="latitude"
                           onChange={props.handleChange}
                           onBlur={props.handleBlur}
-                          value={props.values.latitude}
+                          value={props.values.latitude || ""}
                           autoComplete="off"
                           placeholder="Please enter latitude"
                         />
@@ -386,7 +386,7 @@ const PlacesModal = ({ shows, close }) => {
                           name="longitude"
                           onChange={props.handleChange}
                           onBlur={props.handleBlur}
-                          value={props.values.longitude}
+                          value={props.values.longitude || ""}
                           autoComplete="off"
                           placeholder="Please enter longitude"
                         />
