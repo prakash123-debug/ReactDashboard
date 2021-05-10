@@ -15,6 +15,7 @@ import Category from './Category/Category';
 import SubCategory from './SubCategory/SubCategory'
 import Places from './Places/Places'
 import Tag from './Tag/Tag';
+import AddPlace from './Places/AddPlace';
 const Dashboard = ({history,location,match}) => {
   const backgroundImage = 'images/mountain.jpg';
   const sidebarHeader = {
@@ -55,6 +56,7 @@ const Dashboard = ({history,location,match}) => {
       <Route exact path={`${match.path}/subcategory`} component={SubCategory} />
       <Route exact path={`${match.path}/places`} component={Places} />
       <Route exact path={`${match.path}/tags`} component={Tag} />
+      < Route exact path={`${match.path}/places/addPlace`} component={AddPlace}/>
     </Switch>
 
     </sa.MainViewContainer>

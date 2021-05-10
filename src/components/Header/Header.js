@@ -42,7 +42,7 @@ const Header = (props)=>{
        
         <Container>
              
-        <HeaderContainer  backgroundImage={backgroundImage}  colorPalette={colorPalette}>
+        <HeaderContainer IsSidebarOpen={props.IsSidebarOpen}  backgroundImage={backgroundImage}  colorPalette={colorPalette}>
             <Row>
             {/* <Col md="1" className="mt-2">
                         <Button className="float-right d-none"><FaBell/></Button>
@@ -59,10 +59,8 @@ const Header = (props)=>{
             </button>
          </div>
          </Col> */}
-         <Col md="2" className="TimeStyle">
-             <h4 className="float-right p-2">{CurrentTime}</h4>
-         </Col>
-         <Col md="10">
+         
+         <Col md="12">
          <div className="container p-2">
       <div className="menu-container">
         <button onClick={onClick} className="menu-trigger">

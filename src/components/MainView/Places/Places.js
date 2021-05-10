@@ -4,6 +4,7 @@ import {Row, Col,Button} from 'react-bootstrap';
 import { BsFillPlusCircleFill} from "react-icons/bs";
 import PlacesModal from '../../Modals/PlacesModal/PlacesModal';
 import PlacesTable from '../../Tables/PlaceTable/PlacesTable';
+import {Link} from 'react-router-dom';
 
 const Places = () => {
   const [crumbs, setCrumbs] = useState(['Home', 'Places']);
@@ -21,8 +22,9 @@ const Places = () => {
                         </Breadcrumb>
                     </Col>
                     <Col md="2" className="float-right mt-2">
-                        <Button className="float-right ProductButton"onClick={()=>{
-              handleShow(true)}}><BsFillPlusCircleFill /></Button>
+                        {/* <Button className="float-right ProductButton"onClick={()=>{
+              handleShow(true)}}><BsFillPlusCircleFill /></Button> */}
+              <Link to="/dashboard/places/addPlace"><Button className="float-right ProductButton"><BsFillPlusCircleFill/></Button></Link>
                     </Col>
                 </Col>
             </Row>
