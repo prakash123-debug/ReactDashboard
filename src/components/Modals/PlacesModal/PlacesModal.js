@@ -122,8 +122,6 @@ const PlacesModal = ({ shows, close }) => {
         }}
         validationSchema={Validate}
         onSubmit={async (values, actions) => {
-          console.log(values);
-
           let formdata = new FormData();
           formdata.append("categoryId", values.categoryId);
           formdata.append("email", values.email);
@@ -133,8 +131,7 @@ const PlacesModal = ({ shows, close }) => {
           formdata.append("latitude", values.latitude);
           formdata.append("longitude", values.longitude);
           formdata.append("placeName", values.placeName);
-          // formdata.append('placePhotos', values.placePhotos)
-          // formdata.append('placeVideos', values.placeVideos)
+          formdata.append("tags", JSON.stringify(values.tagId));
 
           const roomPictures = values.placePhotos;
           Array.from(roomPictures).forEach((file) => {
@@ -145,22 +142,6 @@ const PlacesModal = ({ shows, close }) => {
           Array.from(roomVideo).forEach((file) => {
             formdata.append("placeVideos", file);
           });
-
-          // form data cannot be logged so to see the data
-          for (var key of formdata.entries()) {
-            console.log(key[0] + ", " + key[1]);
-          }
-          // const data = {
-          //   categoryId: values.categoryId,
-          //   subCategoryId: values.subCategoryId,
-          //   description: values.description,
-          //   latitude: values.latitude,
-          //   longitude: values.longitude,
-          //   placeName: values.placeName,
-          //   tagId: values.tagId,
-          //   phoneNumber:values.phoneNumber,
-          //   email:values.email
-          // }
 
           await axiosInstance
             .post("/dashboard/place", formdata, {
@@ -470,7 +451,7 @@ const PlacesModal = ({ shows, close }) => {
                           onChange={(event) =>
                             props.setFieldValue(
                               "placePhotos",
-                              event.target.files[0]
+                              event.target.files
                             )
                           }
                           onBlur={props.handleBlur}
